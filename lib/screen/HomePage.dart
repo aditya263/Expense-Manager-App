@@ -2,8 +2,10 @@ import 'package:expense_manager_app/Components/TransactionView.dart';
 import 'package:expense_manager_app/Model/CardModel.dart';
 import 'package:expense_manager_app/Components/CardView.dart';
 import 'package:expense_manager_app/Model/TransactionModel.dart';
+import 'package:expense_manager_app/Providers/CardProvider.dart';
 import 'package:expense_manager_app/screen/AddCardPage.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -31,7 +33,10 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => AddCardPage()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const AddCardPage()));
               },
               icon: const Icon(
                 Icons.add,
@@ -45,7 +50,8 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
+              (Provider.of<CardProvider>(context).getCardlength() > 0 ?
+              Container(
                 height: 210,
                 child: CardView(CardModel(
                     available: 5000,
@@ -54,7 +60,11 @@ class _HomePageState extends State<HomePage> {
                     currency: '\$',
                     id: 0,
                     bankName: '')),
-              ),
+              ) :
+              Container(
+                height: 210,
+                decoration: const BoxDecoration(color: Colors.blue),
+              ),),
               const SizedBox(
                 height: 30,
               ),
@@ -84,8 +94,8 @@ class _HomePageState extends State<HomePage> {
               )
             ],
           ),
-        ),
-      ),
+        ),)
+      ,
     );
   }
 }

@@ -1,5 +1,7 @@
 import 'package:expense_manager_app/Model/CardModel.dart';
+import 'package:expense_manager_app/Providers/CardProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AddCardPage extends StatefulWidget {
   const AddCardPage({Key? key}) : super(key: key);
@@ -9,7 +11,6 @@ class AddCardPage extends StatefulWidget {
 }
 
 class _AddCardPageState extends State<AddCardPage> {
-
   TextEditingController nameController = TextEditingController();
   TextEditingController numberController = TextEditingController();
   TextEditingController bankNameController = TextEditingController();
@@ -17,12 +18,17 @@ class _AddCardPageState extends State<AddCardPage> {
   TextEditingController currencyController = TextEditingController();
 
   void onAdd() {
-    CardModel card = CardModel(id: id,
+    CardModel card = CardModel(
         name: nameController.text,
-        bankName: bankNameController.text,
         number: numberController.text,
+        bankName: bankNameController.text,
+        available: int.parse(availableController.text),
         currency: currencyController.text,
-        available: int?.tryParse(availableController.text));
+        id: 0);
+
+    Provider.of<CardProvider>(context).addCard(card);
+
+    Navigator.of(context).pop(true);
   }
 
   @override
@@ -39,7 +45,7 @@ class _AddCardPageState extends State<AddCardPage> {
         brightness: Brightness.light,
         leading: IconButton(
           icon:
-          const Icon(Icons.arrow_back_ios, color: Colors.black45, size: 20),
+              const Icon(Icons.arrow_back_ios, color: Colors.black45, size: 20),
           onPressed: () {
             Navigator.of(context).pop(true);
           },
@@ -80,7 +86,7 @@ class _AddCardPageState extends State<AddCardPage> {
                     decoration: const InputDecoration(
                         border: InputBorder.none,
                         hintText: 'Card Number',
-                        hintStyle: const TextStyle(color: Colors.grey)),
+                        hintStyle: TextStyle(color: Colors.grey)),
                   ),
                 ),
                 const SizedBox(
@@ -114,7 +120,7 @@ class _AddCardPageState extends State<AddCardPage> {
                     decoration: const InputDecoration(
                         border: InputBorder.none,
                         hintText: 'Available Balance',
-                        hintStyle: const TextStyle(color: Colors.grey)),
+                        hintStyle: TextStyle(color: Colors.grey)),
                   ),
                 ),
                 const SizedBox(

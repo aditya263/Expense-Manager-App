@@ -1,8 +1,19 @@
+import 'dart:js';
+
+import 'package:expense_manager_app/Providers/CardProvider.dart';
 import 'package:expense_manager_app/screen/HomePage.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const MyApp(ChangeNotifierProvider<CardProvider>(
+    builder: (context) => CardProvider(),
+    child: new MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(),
+      home: HomePage(),
+    ),
+  )));
 }
 
 class MyApp extends StatelessWidget {
@@ -12,11 +23,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-      ),
+      theme: ThemeData(),
       home: const HomePage(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
-
