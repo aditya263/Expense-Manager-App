@@ -17,6 +17,7 @@ class _CardViewState extends State<CardView> {
       aspectRatio: 3.1 / 2,
       child: GestureDetector(
         child: Container(
+          margin: const EdgeInsets.only(right: 20),
           decoration: BoxDecoration(
             color: Colors.black87,
             borderRadius: BorderRadius.circular(20.0),
@@ -53,7 +54,7 @@ class _CardViewState extends State<CardView> {
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Text(widget.card.currency,
+                        Text(widget.card.currency +" ",
                             style:
                                 const TextStyle(color: Colors.white, fontSize: 25)),
                         Text(widget.card.available.toString(),

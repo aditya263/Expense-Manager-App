@@ -1,19 +1,10 @@
-import 'dart:js';
-
 import 'package:expense_manager_app/Providers/CardProvider.dart';
 import 'package:expense_manager_app/screen/HomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp(ChangeNotifierProvider<CardProvider>(
-    builder: (context) => CardProvider(),
-    child: new MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(),
-      home: HomePage(),
-    ),
-  )));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -22,10 +13,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(),
-      home: const HomePage(),
-      debugShowCheckedModeBanner: false,
-    );
+    return ChangeNotifierProvider<CardProvider>(
+        create: (context) => CardProvider(),
+        child: MaterialApp(
+          theme: ThemeData(),
+          home: const HomePage(),
+          debugShowCheckedModeBanner: false,
+        ));
   }
 }

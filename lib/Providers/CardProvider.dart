@@ -1,10 +1,13 @@
+import 'dart:collection';
 import 'dart:convert';
 import 'package:expense_manager_app/Model/CardModel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CardProvider with ChangeNotifier {
-  late List<CardModel> cards;
+  late List<CardModel> cards = [];
+
+  UnmodifiableListView<CardModel> get allCards => UnmodifiableListView(cards);
 
   void initialState() {
     syncDataWithProvider();
