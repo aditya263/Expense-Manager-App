@@ -2,6 +2,7 @@ import 'package:expense_manager_app/Components/TransactionView.dart';
 import 'package:expense_manager_app/Model/CardModel.dart';
 import 'package:expense_manager_app/Components/CardView.dart';
 import 'package:expense_manager_app/Model/TransactionModel.dart';
+import 'package:expense_manager_app/screen/AddCardPage.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -29,7 +30,9 @@ class _HomePageState extends State<HomePage> {
         leading: null,
         actions: [
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => AddCardPage()));
+              },
               icon: const Icon(
                 Icons.add,
                 color: Colors.black45,
